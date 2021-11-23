@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Models\Config_Sympozia;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,14 +14,15 @@ use App\Models\Config_Sympozia;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
-    if(Config_Sympozia::where('code', 'FRP')->first()->status)
+    if (Config_Sympozia::where('code', 'FRP')->first()->status) {
         return view('welcome');
-    else
+    } else {
         return redirect()->route('home');
-    
+    }
+
 });
 
 Auth::routes();
@@ -33,7 +36,6 @@ Route::get('/committee/news', \App\Http\Livewire\Committee\NewsIdx::class)->name
 Route::get('/user/admin', \App\Http\Livewire\User\Admin\Idx::class)->name('user.admin');
 Route::get('/user/profile', \App\Http\Livewire\User\Profile\Idx::class)->name('user.profile');
 Route::get('/user/refresh', function () {
-    \Session::flush();
+    Session::flush();
     return redirect('/');
 })->name('user.refresh');
-
