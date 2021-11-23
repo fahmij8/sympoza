@@ -2,8 +2,6 @@
 
 ## Sympozia Project
 
----
-
 Usage :
 
 -   Install php dependencies (composer)
@@ -12,7 +10,7 @@ Usage :
 composer install
 ```
 
--   Create SQL Database called `laravel`
+-   Create SQL Database named `laravel`
 -   Migrate & seed initial database
 
 ```
