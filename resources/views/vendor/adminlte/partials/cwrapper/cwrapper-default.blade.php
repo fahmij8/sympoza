@@ -1,9 +1,9 @@
 @inject('layoutHelper', 'JeroenNoten\LaravelAdminLte\Helpers\LayoutHelper')
 
-@if($layoutHelper->isLayoutTopnavEnabled())
-    @php( $def_container_class = 'container' )
+@if ($layoutHelper->isLayoutTopnavEnabled())
+    @php($def_container_class = 'container')
 @else
-    @php( $def_container_class = 'container-fluid' )
+    @php($def_container_class = 'container-fluid')
 @endif
 
 {{-- Default Content Wrapper --}}
@@ -19,12 +19,7 @@
     @endif
 
     {{-- Main Content --}}
-    <div class="row">
-        <div class="col-md-12 offset-md-0">
-            <br>
-        </div>
-    </div>
-    <div class="content">
+    <div class="content pt-4">
         <div class="{{ config('adminlte.classes_content') ?: $def_container_class }}">
             @yield('content')
         </div>
