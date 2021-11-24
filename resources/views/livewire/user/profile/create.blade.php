@@ -13,19 +13,19 @@
                 </div>
                 <div class="col-sm-5 offset-sm-0 text-left">
                     <div class="form-group">
-                        <input rows="2" wire:model = "title" class="form-control"></textarea>
-                        @error('title') <span class="text-danger">{{ $message }}</span>@enderror
+                        <input rows="2" wire:model="firstName" class="form-control"></textarea>
+                        @error('firstName') <span class="text-danger">{{ $message }}</span>@enderror
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-sm-3 offset-sm-0 text-right">
                     <b>*Last name (mixed case, i.e., Smith instead of SMITH)</b>
                 </div>
                 <div class="col-sm-6 offset-sm-0 text-left">
                     <div class="form-group">
-                        <input rows="2" wire:model = "lastName" class="form-control"></textarea>
+                        <input rows="2" wire:model="lastName" class="form-control"></textarea>
                         @error('lastName') <span class="text-danger">{{ $message }}</span>@enderror
                     </div>
                 </div>
@@ -39,5 +39,5 @@
         </div>
     </div>
 
-    
+
 </div>
