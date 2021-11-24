@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Auth;
 
 class Index extends Component
 {
@@ -11,20 +11,21 @@ class Index extends Component
     {
         return view('livewire.index')->layout('adminlte::page');
     }
-    public function mount(){
-        if(!auth()->check()){
+    public function mount()
+    {
+        if (!auth()->check()) {
             return redirect()->route('login');
-        }else{
-            if(!Auth::user()->hasRole(['admin', 'committee', 'author', 'reviewer'])){
+        } else {
+            if (!Auth::user()->hasRole(['admin', 'committee', 'author', 'reviewer'])) {
                 Auth::user()->attachRole('author');
             }
-            if(Auth::user()->hasRole('author')){
+            if (Auth::user()->hasRole('author')) {
                 return redirect()->route('author.home');
             }
-            if(Auth::user()->hasRole('committee')){
+            if (Auth::user()->hasRole('committee')) {
                 return redirect()->route('committee.home');
             }
-            if(Auth::user()->hasRole('admin')){
+            if (Auth::user()->hasRole('admin')) {
                 return redirect()->route('admin.home');
             }
         }
