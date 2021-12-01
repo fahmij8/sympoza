@@ -35,7 +35,7 @@
                                 </button>
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-xs">
+                                <button wire:click="deleteManuscript({{$paper->id}})"class="btn btn-xs">
                                     <i class="fas fa-minus-circle" style="color: red"></i>
                                 </button>
                             </td>
@@ -47,7 +47,18 @@
                             </td>
                             <td class="text-center">
                                 <button class="btn btn-xs">
-                                    <i class="far fa-file"></i>
+                                    
+
+                                    @if ($paper->file != null)
+                                        @foreach($paper->file as $manuscript)
+                                            
+                                            @if($manuscript->file_type == \App\Models\Filetype_sympozia::where('code', 'REV')->first()->id) 
+                                            <a href="{{url('/')}}{{ Storage::disk('local')->url($manuscript->name)}}" target="blank"><i class="far fa-file"></i></a>
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        <i class="far fa-file"></i>
+                                    @endif
                                 </button>
                             </td class="text-center">
                             <td class="text-center">

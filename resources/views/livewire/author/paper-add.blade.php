@@ -34,6 +34,13 @@
         </button>
 
     </div>
+    <div class="form-group">
+      <label for="">Manuscript</label>
+      <input type="file" wire:model="manuscriptFile" name="" id="" class="form-control" placeholder="Please upload file" aria-describedby="helpId">
+      <small id="helpId" class="text-muted">Please upload PDF file type</small>
+      <br>
+      @error('manuscriptFile') <span class="text-danger">{{ $message }}</span>@enderror
+    </div>
 
     <div class="form-group">
        

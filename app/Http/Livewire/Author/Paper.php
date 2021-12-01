@@ -12,4 +12,8 @@ class Paper extends Component
         $papers = Manuscript_Sympozia::where('user_id', Auth::user()->id)->get();
         return view('livewire.author.paper', compact('papers'));
     }
+
+    public function deleteManuscript($id){
+        Manuscript_Sympozia::where('id', $id)->delete();
+    }
 }
