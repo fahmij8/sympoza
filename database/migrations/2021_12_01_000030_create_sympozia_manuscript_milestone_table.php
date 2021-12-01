@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSympoziaProfileTable extends Migration
+class CreateSympoziaManuscriptMilestoneTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateSympoziaProfileTable extends Migration
      */
     public function up()
     {
-        Schema::create('sympozia_profile', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('first_name');
-            $table->string('last_name');
+        Schema::create('sympozia_manuscript_milestone', function (Blueprint $table) {
+            $table->id();
+            $table->string('code');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateSympoziaProfileTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sympozia_profile');
+        Schema::dropIfExists('sympozia_manuscript_milestone');
     }
 }

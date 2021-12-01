@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSympoziaConfigTable extends Migration
+class CreateSympoziaFileTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateSympoziaConfigTable extends Migration
      */
     public function up()
     {
-        Schema::create('sympozia_config', function (Blueprint $table) {
-            $table->text('code');
-            $table->boolean('status');
+        Schema::create('sympozia_file_type', function (Blueprint $table) {
+            $table->id();
+            $table->string('code');
+            $table->text('description');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +28,6 @@ class CreateSympoziaConfigTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sympozia_config');
+        Schema::dropIfExists('sympozia_file_type');
     }
 }
