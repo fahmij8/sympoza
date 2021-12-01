@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Config_Sympozia extends Model
 {
-    public $timestamps = false;
-    protected $table = 'sympozia_config';
     use HasFactory;
+    protected $table = 'sympozia_config';
+    protected $guarded = [];
 }
