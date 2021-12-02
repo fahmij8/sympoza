@@ -42,9 +42,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function adminlte_image()
-    {
-        return 'https://cdn-icons-png.flaticon.com/512/149/149071.png';
-    }
 }
