@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Conferences_Sympozia;
 use App\Models\Config_Sympozia;
 use App\Models\FileType_sympozia;
 use App\Models\ManuscriptMilestone_Sympozia;
@@ -51,6 +52,22 @@ class DatabaseSeeder extends Seeder
             'code' => 'FRP',
             'description' => 'Front page',
             'status' => '1',
+        ]);
+
+        // Sympozia Conferences
+        $scopes = [
+            "Engineered materials, Dielectrics, and Plasmas",
+            "Telecommunication, and Networking",
+            "Component, circuit and devices",
+            "Power Energy and Industry application",
+            "Computing and processing",
+            "Electrical Engineering Education",
+        ];
+
+        Conferences_Sympozia::create([
+            'name' => 'The 3rd International Symposium on Materials and Electrical Engineering',
+            'short_name' => 'ISMEE2021',
+            'scope' => json_encode($scopes),
         ]);
 
         // Sympozia file type
@@ -124,7 +141,7 @@ class DatabaseSeeder extends Seeder
 
         // Initial User
         $fahmi = User::create([
-            'name' => 'Fahmi',
+            'name' => 'Fahmi Jabbar',
             'email' => 'fahmijabbar@google.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
