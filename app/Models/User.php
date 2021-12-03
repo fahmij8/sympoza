@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Manuscript_Sympozia;
+use App\Models\Profile_Sympozia;
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -42,4 +45,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role()
+    {
+        return $this->hasOne(Role::class);
+    }
+
+    public function paper()
+    {
+        return $this->hasMany(Manuscript_Sympozia::class);
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile_Sympozia::class);
+    }
 }
