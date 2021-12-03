@@ -125,3 +125,9 @@
 .no-search-result {
   display: none;
 }
+
+.bs-stepper-label {
+  white-space: normal;
+  overflow-wrap: normal;
+  font-size: clamp(10px, 3.5vw, 17px);
+}
