@@ -2,24 +2,27 @@
 
 namespace App\Http\Livewire\Author;
 
-use Livewire\Component;
 use App\Models\Profile_Sympozia;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Livewire\Component;
 
 class SubmissionIdx extends Component
 {
+    public $routeName;
 
     public function render()
     {
+        $this->routeName = Route::currentRouteName();
         return view('livewire.author.submission-idx')->layout('adminlte::page');
     }
 
-    public function mount(){
+    public function mount()
+    {
         $profile = Profile_Sympozia::where('user_id', Auth::user()->id)->first();
-        if(!$profile){
+        if (!$profile) {
             return redirect()->route('user.profile');
         }
     }
 
-    
 }
