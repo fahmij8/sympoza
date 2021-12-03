@@ -3,6 +3,7 @@
 @endsection
 
 <div>
+    @section('plugins.Select2', true)
     @section('content')
         <div class="row">
             <div class="col-sm-12 offset-sm-0">
@@ -31,5 +32,5 @@
 </div>
 
 @push('scripts')
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.es5.js') }}"></script>
 @endpush

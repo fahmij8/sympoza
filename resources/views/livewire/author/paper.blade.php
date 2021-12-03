@@ -1,6 +1,5 @@
 <div>
-    <br>
-    @if($papers->isNotEmpty())
+    @if ($papers->isNotEmpty())
         <div class="table-responsive users-table">
             <table class="table table-striped table-sm data-table">
                 <thead class="thead">
@@ -16,10 +15,10 @@
                     </tr>
                 </thead>
                 <tbody id="users-table">
-                    @foreach($papers as $paper)
+                    @foreach ($papers as $paper)
                         <tr>
                             <td>
-                                {{$paper->title}}
+                                {{ $paper->title }}
                             </td>
                             <td class="text-center">
                                 status
@@ -35,7 +34,7 @@
                                 </button>
                             </td>
                             <td class="text-center">
-                                <button wire:click="deleteManuscript({{$paper->id}})"class="btn btn-xs">
+                                <button class="btn btn-xs">
                                     <i class="fas fa-minus-circle" style="color: red"></i>
                                 </button>
                             </td>
@@ -47,18 +46,7 @@
                             </td>
                             <td class="text-center">
                                 <button class="btn btn-xs">
-                                    
-
-                                    @if ($paper->file != null)
-                                        @foreach($paper->file as $manuscript)
-                                            
-                                            @if($manuscript->file_type == \App\Models\Filetype_sympozia::where('code', 'REV')->first()->id) 
-                                            <a href="{{url('/')}}{{ Storage::disk('local')->url($manuscript->name)}}" target="blank"><i class="far fa-file"></i></a>
-                                            @endif
-                                        @endforeach
-                                    @else
-                                        <i class="far fa-file"></i>
-                                    @endif
+                                    <i class="far fa-file"></i>
                                 </button>
                             </td class="text-center">
                             <td class="text-center">
@@ -71,7 +59,5 @@
                 </tbody>
             </table>
         </div>
-    @else
-        There is no submission record, please select <b>Add Paper</b> to create one.
     @endif
 </div>
