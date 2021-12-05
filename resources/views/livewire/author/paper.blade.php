@@ -1,5 +1,5 @@
 <div>
-    @if ($papers->isNotEmpty())
+    @if (!auth()->user()->manuscript->isEmpty())
         <div class="table-responsive users-table">
             <table class="table table-striped table-sm data-table">
                 <thead class="thead">
@@ -15,7 +15,7 @@
                     </tr>
                 </thead>
                 <tbody id="users-table">
-                    @foreach ($papers as $paper)
+                    @foreach (auth()->user()->manuscript as $paper)
                         <tr>
                             <td>
                                 {{ $paper->title }}

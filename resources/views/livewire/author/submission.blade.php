@@ -3,7 +3,7 @@
         <x-loading></x-loading>
     </div>
 
-    @if (!auth()->user()->paper->isEmpty())
+    @if (!auth()->user()->manuscript->isEmpty())
         @if ($action == null)
             <div class="row">
                 <div class="col-sm-12 offset-sm-0">

@@ -1,51 +1,36 @@
 <div>
-    <div class="container rounded border">
+    <div class="rounded border mb-3">
         <div class="row p-3">
-            <div class="col-12 col-md-6 col-lg-6 col-xl-6">
-                <div class="form-group">
-                    <label for="author_fn">First Name</label>
-                    <input id='author_fn' type="text" class="form-control" placeholder="First Name" autocomplete="off"
-                        required></input>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xl-6">
-                <div class="form-group">
-                    <label for="author_ln">Last Name</label>
-                    <input id='author_ln' type="text" class="form-control" placeholder="Last Name" autocomplete="off"
-                        required></input>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xl-6">
-                <div class="form-group">
-                    <label for="author_af">Affiliation/Organization</label>
-                    <input id='author_af' type="text" class="form-control" placeholder="Affiliation/Organization Name"
-                        autocomplete="off" required></input>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xl-6">
-                <div class="form-group">
-                    <label for="author_ml">Email</label>
-                    <input id='author_ml' type="email" class="form-control" placeholder="john.doe@domain.com"
-                        autocomplete="off" required></input>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xl-6">
-                <div class="form-group">
+            <x-adminlte-input name="author_fn" error-key="author_fn" type="text" fgroup-class="col-md-6"
+                class="{{ $errors->has('author_fn') ? 'is-invalid' : '' }}" label="First Name"
+                placeholder="Author first name" wire:model="author_fn" autocomplete="off" />
+            <x-adminlte-input name="author_ln" error-key="author_ln" type="text" fgroup-class="col-md-6"
+                class="{{ $errors->has('author_ln') ? 'is-invalid' : '' }}" label="Last Name"
+                placeholder="Author last name" wire:model="author_ln" autocomplete="off" />
+            <x-adminlte-input name="author_af" error-key="author_af" type="text" fgroup-class="col-md-6"
+                class="{{ $errors->has('author_af') ? 'is-invalid' : '' }}" label="Affiliation"
+                placeholder="Author affiliation/organization" wire:model="author_af" autocomplete="off" />
+            <x-adminlte-input name="author_ml" error-key="author_ml" type="email" fgroup-class="col-md-6"
+                class="{{ $errors->has('author_ml') ? 'is-invalid' : '' }}" label="Email" placeholder="Author Email"
+                wire:model="author_ml" autocomplete="off" />
+            <div class="form-group col-md-6">
+                <div class="form-group mb-0" wire:ignore>
                     <label for="author_ct" class="d-block">Country</label>
-                    <input type="text" id="author_ct" class="form-control" autocomplete="off" required>
+                    <input wire:model='author_ct' type="text" id="author_ct"
+                        class="form-control {{ $errors->has('author_ct') ? 'is-invalid' : '' }}" autocomplete="off"
+                        wire:focusout='$set("author_ct", $event.target.value)'>
+                </div>
+                <div class="form-group mb-0">
+                    @error('author_ct') <div><small class="text-danger text-bold">{{ $message }}</small></div>
+                    @enderror
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xl-6">
-                <div class="form-group">
-                    <label for="author_co">Is co-author?</label>
-                    <select id='author_co' class="form-control">
-                        <option hidden>--- Select co-author status ---</option>
-                        <option value="no">No</option>
-                        <option value="yes">Yes</option>
-                    </select>
-                </div>
-            </div>
-            <button class="btn btn-primary" wire:click='dd("here")'>Check Function</button>
+            <x-adminlte-select name="author_co" label="Is co-author?" id='author_co' fgroup-class="col-md-6"
+                class="{{ $errors->has('author_co') ? 'is-invalid' : '' }}" wire:model='author_co'>
+                <x-adminlte-options :options="['No'=>'No', 'Yes'=>'Yes']" placeholder=" Select an option..." />
+            </x-adminlte-select>
+            <x-adminlte-button class="bg-gradient-info ml-2 mb-2 mt-n1" type="button" label="Add Author Data"
+                icon="fas fa-user-plus mr-1" wire:click='checkMe' />
         </div>
     </div>
 </div>

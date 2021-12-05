@@ -1,4 +1,6 @@
 @section('css')
+    <link rel="stylesheet" href="{{ asset('vendor/country-select/css/countrySelect.min.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.css">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 @endsection
 
@@ -32,5 +34,9 @@
 </div>
 
 @push('scripts')
+    <script src="https://unpkg.com/filepond-plugin-pdf-preview/dist/filepond-plugin-pdf-preview.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script src="{{ asset('vendor/country-select/js/countrySelect.min.js') }}"></script>
     <script src="{{ mix('js/app.es5.js') }}"></script>
 @endpush

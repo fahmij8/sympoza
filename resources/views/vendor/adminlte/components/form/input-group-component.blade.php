@@ -26,33 +26,30 @@
     </div>
 
     {{-- Error feedback --}}
-    @if($isInvalid() && ! isset($disableFeedback))
+    @error($errorKey)
         <span class="invalid-feedback d-block" role="alert">
             <strong>{{ $errors->first($errorKey) }}</strong>
         </span>
-    @endif
+    @enderror
+
+
 
 </div>
 
 {{-- Extra style customization for invalid input groups --}}
 
 @once
-@push('css')
-<style type="text/css">
+    @push('css')
+        <style type="text/css">
+            {{-- Highlight invalid input groups with a box-shadow --}} .adminlte-invalid-igroup {
+                box-shadow: 0 .25rem 0.5rem rgba(0, 0, 0, .1);
+            }
 
-    {{-- Highlight invalid input groups with a box-shadow --}}
+            {{-- Setup a red border on elements inside prepend/append add-ons --}} .adminlte-invalid-igroup>.input-group-prepend>*,
+            .adminlte-invalid-igroup>.input-group-append>* {
+                border-color: #dc3545 !important;
+            }
 
-    .adminlte-invalid-igroup {
-        box-shadow: 0 .25rem 0.5rem rgba(0,0,0,.1);
-    }
-
-    {{-- Setup a red border on elements inside prepend/append add-ons --}}
-
-    .adminlte-invalid-igroup > .input-group-prepend > *,
-    .adminlte-invalid-igroup > .input-group-append > * {
-        border-color: #dc3545 !important;
-    }
-
-</style>
-@endpush
+        </style>
+    @endpush
 @endonce

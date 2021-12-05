@@ -1,15 +1,12 @@
 <div>
-    @section('plugins.Select2', true)
     <div wire:loading.block wire:target='submitManuscript'>
         <x-loading></x-loading>
     </div>
-    <h5>
-        <b>.: Add Paper</b>
-    </h5>
+    <h5 class="text-bold">.: Add Paper</h5>
     <hr>
     @include('livewire.message.message')
-    <div class="bs-stepper" wire:ignore>
-        <div class="bs-stepper-header" role="tablist">
+    <div class="bs-stepper" wire:ignore.self>
+        <div class="bs-stepper-header" role="tablist" wire:ignore>
             <div class="step" data-target="#submission-info">
                 <button type="button" class="step-trigger" role="tab" aria-controls="submission-info"
                     id="submission-info-trigger">
@@ -37,70 +34,113 @@
                 </button>
             </div>
         </div>
-        <div class="bs-stepper-content">
+        <div class="bs-stepper-content" wire:ignore.self>
             <div id="submission-info" class="content" role="tabpanel" aria-labelledby="submission-info-trigger"
-                wire:ignore>
-                <div class="form-group" wire:ignore>
-                    <label for="conferences_name">Conferences</label>
-                    <select wire:model='conferences_name' class="custom-select">
-                        <option hidden>--- Select the conferences ---</option>
-                        @foreach ($conferences as $conference)
-                            <option value="{{ $conference->short_name }}">{{ $conference->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                wire:ignore.self>
+                <x-adminlte-input name="title" error-key="title" type="text"
+                    class="{{ $errors->has('title') ? 'is-invalid' : '' }}" label="Title"
+                    placeholder="Your paper title" wire:model="title" autocomplete="off" />
+
+                <x-adminlte-textarea name="abstract" error-key="abstract" placeholder="Your paper abstract" rows='8'
+                    class="{{ $errors->has('abstract') ? 'is-invalid' : '' }}" label="Abstract"
+                    wire:model="abstract" />
+
                 <div class="form-group">
-                    <label for="title">Title</label>
-                    <input wire:model="title" type="text"
-                        class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}"
-                        placeholder="Your paper title" autocomplete="off"></input>
-                    @error('title') <span class="text-danger">{{ $message }}</span>@enderror
+                    <div class="form-group" wire:ignore>
+                        <label for="keywords">Keywords</label>
+                        <input type="text" id="keywords" wire:change="$set('keywords', $event.target.value)"
+                            autocomplete="off"></input>
+                        <small class="text-muted">Type your keywords, separate by pressing enter "↵" or comma ",".
+                            Maximum 4 keywords.</small>
+                    </div>
+                    <div class="form-group mb-0">
+                        @error('keywords') <div class="mt-n3"><small
+                                class="text-danger text-bold">{{ $message }}</small></div>@enderror
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="abstract">Abstract</label>
-                    <textarea wire:model="abstract"
-                        class="form-control {{ $errors->has('abstract') ? 'is-invalid' : '' }}"
-                        placeholder="Your paper abstract" rows="8"></textarea>
-                    @error('abstract') <span class="text-danger">{{ $message }}</span>@enderror
-                </div>
-                <div class="form-group" wire:ignore>
-                    <label for="keywords">Keywords</label>
-                    <input type="text" id="keywords" wire:change="$set('keywords', $event.target.value)"
-                        autocomplete="off"></input>
-                    <small class="text-muted">Type your keywords, separate with enter. Maximum 4 keywords.</small>
-                    @error('keywords') <span class="text-danger">{{ $message }}</span>@enderror
-                </div>
-                <button class="btn btn-primary stepper-next">Next</button>
+                <x-adminlte-button label='Next' theme="primary" icon="fas fa-chevron-circle-right mr-1"
+                    class="rounded-pill stepper-next" />
             </div>
             <div id="submission-author" class="content" role="tabpanel"
-                aria-labelledby="submission-author-trigger">
+                aria-labelledby="submission-author-trigger" wire:ignore.self>
                 <div class="form-group">
-                    <label for="presenter">Presenter</label>
-                    <input wire:model="presenter" type="text"
-                        class="form-control {{ $errors->has('presenter') ? 'is-invalid' : '' }}"
-                        placeholder="Presenter Name" autocomplete="off"></input>
-                    @error('title') <span class="text-danger">{{ $message }}</span>@enderror
-                </div>
-                <div class="form-group" wire:ignore.self>
                     <label for='authors-add-group' class="d-block">Authorship Details</label>
-                    <div>
-                        <livewire:author.author-detail :key="$authors" />
+                    <div class="mb-3">
+                        @livewire('author.author-detail')
                     </div>
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover text-nowrap">
+                            <thead class="bg-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Full Name</th>
+                                    <th>Affiliation</th>
+                                    <th>Email</th>
+                                    <th>Country</th>
+                                    <th>Co-author</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (count($authors) > 0)
+                                    @foreach ($authors as $author)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $author['author_ln'] }}, {{ $author['author_fn'] }}</td>
+                                            <td>{{ $author['author_af'] }}</td>
+                                            <td>{{ $author['author_ml'] }}</td>
+                                            <td>{{ $author['author_ct'] }}</td>
+                                            <td>
+                                                <div class="form-check text-center"><input class="form-check-input"
+                                                        type="checkbox" disabled
+                                                        {{ $author['author_co'] == 'Yes' ? 'checked' : '' }}></div>
+                                            </td>
+                                            <td>
+                                                <button wire:click="removeAuthor({{ $loop->iteration - 1 }})"
+                                                    class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="7" class="text-center">No authors added yet.</td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                    @error('authors') <div><small class="text-danger text-bold">{{ $message }}</small></div>
+                    @enderror
                 </div>
-                <button class="btn btn-primary stepper-prev">Previous</button>
-                <button class="btn btn-primary stepper-next">Next</button>
+                <x-adminlte-button label='Previous' theme="primary" icon="fas fa-chevron-circle-left mr-1"
+                    class="rounded-pill stepper-prev" />
+                <x-adminlte-button label='Next' theme="primary" icon="fas fa-chevron-circle-right mr-1"
+                    class="rounded-pill stepper-next" />
             </div>
-            <div id="submission-file" class="content" role="tabpanel" aria-labelledby="submission-file-trigger">
-                <div class="form-group">
-                    <label for="manuscript_file">Draft paper (full)</label>
-                    <div class="custom-file">
-                        <input wire:model="manuscript_file" type="file" class="custom-file-input" id="manuscript_file"
-                            name="upload" accept="application/pdf">
-                        <label class="custom-file-label" for=manuscript_file">Choose file</label>
-                        @error('manuscript_file') <span class="text-danger">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-                <button class="btn btn-primary stepper-prev">Previous</button>
+            <div id="submission-file" class="content" role="tabpanel" aria-labelledby="submission-file-trigger"
+                wire:ignore.self>
+                <x-adminlte-select name="conferences_name" label="Conferences" id='conferences_name'
+                    class="{{ $errors->has('conferences_name') ? 'is-invalid' : '' }}" wire:model='conferences_name'>
+                    <option hidden>--- Select the conferences ---</option>
+                    @foreach ($conferences as $conference)
+                        <option value="{{ $conference->short_name }}">{{ $conference->name }}</option>
+                    @endforeach
+                </x-adminlte-select>
+
+                <x-adminlte-input name="presenter" error-key="presenter" type="text"
+                    class="{{ $errors->has('presenter') ? 'is-invalid' : '' }}" label="Presenter"
+                    placeholder="Presenter Name" wire:model="presenter" autocomplete="off" />
+
+                <x-adminlte-input name="presenter_contact" error-key="presenter_contact" type="tel"
+                    class="{{ $errors->has('presenter_contact') ? 'is-invalid' : '' }}" label="Presenter Contact"
+                    placeholder="Presenter Phone Number" wire:model="presenter_contact" autocomplete="off" />
+
+                <x-filepond wire:model="manuscript_file" key='manuscript_file' />
+
+                <x-adminlte-button label='Previous' theme="primary" icon="fas fa-chevron-circle-left mr-1"
+                    class="rounded-pill stepper-prev" />
                 <div class="form-group">
                     <button wire:click="submitManuscript" class="btn btn-success d-block ml-auto"> <i
                             class="fas fa-save"></i>
