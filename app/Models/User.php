@@ -48,16 +48,16 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->hasOne(Role::class);
+        return $this->hasOne(Role::class, 'user_id', 'id');
     }
 
-    public function paper()
+    public function manuscript()
     {
-        return $this->hasMany(Manuscript_Sympozia::class);
+        return $this->hasMany(Manuscript_Sympozia::class, 'user_id', 'id');
     }
 
     public function profile()
     {
-        return $this->hasOne(Profile_Sympozia::class);
+        return $this->hasOne(Profile_Sympozia::class, 'user_id', 'id');
     }
 }

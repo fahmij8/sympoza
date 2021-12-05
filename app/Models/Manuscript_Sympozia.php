@@ -8,10 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Manuscript_Sympozia extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id','paper_code', 'title', 'abstract'];
+    protected $guarded = [];
     protected $table = 'sympozia_manuscript';
 
-    public function file(){
+    public function file()
+    {
         return $this->hasMany(ManuscriptFile_sympozia::class, 'manuscript_id', 'id');
+    }
+
+    public function authors()
+    {
+        return $this->hasMany(ManuscriptAuthor_sympozia::class, 'manuscript_id', 'id');
     }
 }
