@@ -2,6 +2,7 @@ import "bs-stepper/dist/css/bs-stepper.min.css";
 import "@yaireo/tagify/dist/tagify.css";
 import Stepper from "bs-stepper";
 import Tagify from "@yaireo/tagify";
+import bsCustomFileInput from "bs-custom-file-input";
 
 // Function Helper
 const initAddPaper = () => {
@@ -21,6 +22,20 @@ const initAddPaper = () => {
     new Tagify(document.querySelector("#keywords"), {
         maxTags: 4,
     });
+
+    $("#author_ct")
+        .countrySelect({
+            preferredCountries: ["id", "my", "ph", "sg"],
+        })
+        .val(null);
+    $(".country-select").addClass("d-block");
+    $(".country-list").removeAttr("style");
+    $(".selected-flag").on("click", () => {
+        let widthDropdown = $(".country-select").width();
+        $(".country-list").width(widthDropdown - 4);
+    });
+
+    bsCustomFileInput.init();
 };
 
 // window.addEventListener("popstate", function (event) {
@@ -33,6 +48,7 @@ document.addEventListener("livewire:load", function () {
     Livewire.on("action", (actions) => {
         if (actions === "show-add-paper") {
             window.history.pushState(null, null, "/author/submission/add");
+
             initAddPaper();
         }
     });
