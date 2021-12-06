@@ -88,34 +88,34 @@ class DatabaseSeeder extends Seeder
 
         // Sympozia milestone
         ManuscriptMilestone_Sympozia::create([
-            'code' => 'CRE',
-            'description' => 'Created',
+            'code' => 'WRV',
+            'description' => 'Awaiting Review',
         ]);
 
         ManuscriptMilestone_Sympozia::create([
-            'code' => 'SUB',
-            'description' => 'Submitted',
+            'code' => 'IRV',
+            'description' => 'Review in Progress',
         ]);
 
         ManuscriptMilestone_Sympozia::create([
-            'code' => 'REV',
-            'description' => 'Review',
+            'code' => 'CRV',
+            'description' => 'Review Completed',
         ]);
 
         // Sympozia Manuscript Status
         ManuscriptStatus_Sympozia::create([
-            'code' => 'CRE',
-            'description' => 'Created',
-        ]);
-
-        ManuscriptStatus_Sympozia::create([
             'code' => 'SUB',
             'description' => 'Submitted',
         ]);
 
         ManuscriptStatus_Sympozia::create([
+            'code' => 'ACC',
+            'description' => 'Accepted',
+        ]);
+
+        ManuscriptStatus_Sympozia::create([
             'code' => 'REV',
-            'description' => 'Review',
+            'description' => 'Need Revision',
         ]);
 
         // Sympozia Profile Title
@@ -156,6 +156,8 @@ class DatabaseSeeder extends Seeder
         $fahmi->roles()->attach(Role::where('name', 'author')->first());
 
         // Additional User
-        User::factory()->count(3)->create();
+        User::factory()->count(3)->create()->each(function ($user) {
+            $user->roles()->attach(Role::where('name', 'author')->first());
+        });
     }
 }

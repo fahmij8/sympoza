@@ -13,11 +13,11 @@ class Manuscript_Sympozia extends Model
 
     public function file()
     {
-        return $this->hasMany(ManuscriptFile_sympozia::class, 'manuscript_id', 'id');
+        return $this->hasOne(ManuscriptFile_sympozia::class, 'manuscript_id', 'id');
     }
 
     public function authors()
     {
-        return $this->hasMany(ManuscriptAuthor_sympozia::class, 'manuscript_id', 'id');
+        return $this->hasOne(ManuscriptAuthor_sympozia::class, 'manuscript_id', 'id');
     }
 }

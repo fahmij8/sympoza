@@ -16,9 +16,9 @@ class CreateSympoziaManuscriptTable extends Migration
         Schema::create('sympozia_manuscript', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('conferences_id');
-            $table->foreign('conferences_id')->references('id')->on('sympozia_conferences')->onDelete('cascade');
+            $table->foreign('conferences_id')->references('id')->on('sympozia_conferences');
             $table->string('title');
             $table->text('abstract');
             $table->unsignedBigInteger('milestone_id');

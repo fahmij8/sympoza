@@ -16,7 +16,7 @@ class CreateSympoziaManuscriptAuthorTable extends Migration
         Schema::create('sympozia_manuscript_author', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('manuscript_id');
-            $table->foreign('manuscript_id')->references('id')->on('sympozia_manuscript');
+            $table->foreign('manuscript_id')->references('id')->on('sympozia_manuscript')->onDelete('cascade');
             $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('users');
             $table->string('presenter');

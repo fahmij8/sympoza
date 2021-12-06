@@ -16,9 +16,9 @@ class CreateSympoziaManuscriptFileTable extends Migration
         Schema::create('sympozia_manuscript_file', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('manuscript_id');
-            $table->foreign('manuscript_id')->references('id')->on('sympozia_manuscript');
+            $table->foreign('manuscript_id')->references('id')->on('sympozia_manuscript')->onDelete('cascade');
             $table->unsignedBigInteger('file_type');
-            $table->foreign('file_type')->references('id')->on('sympozia_file_type');
+            $table->foreign('file_type')->references('id')->on('sympozia_file_type')->onDelete('cascade');
             $table->string('name');
             $table->timestamps();
         });
