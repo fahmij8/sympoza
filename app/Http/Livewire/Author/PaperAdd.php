@@ -7,6 +7,7 @@ use App\Models\ManuscriptAuthor_Sympozia;
 use App\Models\ManuscriptFile_Sympozia;
 use App\Models\Manuscript_Sympozia;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -67,7 +68,22 @@ class PaperAdd extends Component
     public function submitManuscript()
     {
 
-        $this->validate();
+        $validator = Validator::make([
+            'title' => $this->title,
+            'abstract' => $this->abstract,
+            'keywords' => $this->keywords,
+            'authors' => $this->authors,
+            'conferences_name' => $this->conferences_name,
+            'presenter' => $this->presenter,
+            'presenter_contact' => $this->presenter_contact,
+            'manuscript_file' => $this->manuscript_file,
+        ], $this->rules);
+
+        if ($validator->fails()) {
+            session()->flash('error', 'Please re-check the fields for the errors.');
+            $validator->validate();
+            return;
+        }
 
         $manuscript_user_filename = $this->conferences_name . '-' . Auth::user()->id . '-' . now()->format('YmdHis') . '-' . 'manuscript.pdf';
 
@@ -105,7 +121,22 @@ class PaperAdd extends Component
             'author_list' => json_encode($this->authors),
         ]);
 
+        $this->resetInput();
+        session()->flash('success', 'Manuscript Submitted Successfully');
         return redirect()->route('author.submission');
+    }
+
+    public function resetInput()
+    {
+        $this->title = null;
+        $this->abstract = null;
+        $this->keywords = null;
+        $this->authors = array();
+        $this->author_fullname = null;
+        $this->conferences_name = null;
+        $this->presenter = null;
+        $this->presenter_contact = null;
+        $this->manuscript_file = null;
     }
 
 }
