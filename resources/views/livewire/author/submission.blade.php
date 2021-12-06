@@ -2,7 +2,7 @@
     <div wire:loading.block>
         <x-loading></x-loading>
     </div>
-
+    @include('livewire.message.message')
     @if (!auth()->user()->manuscript->isEmpty())
         @if ($action == null)
             <div class="row">
