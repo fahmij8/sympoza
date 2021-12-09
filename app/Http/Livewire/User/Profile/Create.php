@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\User\Profile;
 
 use App\Models\Profile_Sympozia;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Create extends Component
@@ -27,6 +27,7 @@ class Create extends Component
             Profile_Sympozia::where('user_id', Auth::user()->id)->update([
                 'first_name' => $this->firstName,
                 'last_name' => $this->lastName,
+                'email' => Auth::user()->email,
             ]);
             session()->flash('success', 'Profile has been updated');
         } else {
@@ -34,6 +35,7 @@ class Create extends Component
                 'first_name' => $this->firstName,
                 'last_name' => $this->lastName,
                 'user_id' => Auth::user()->id,
+                'email' => Auth::user()->email,
             ]);
             session()->flash('success', 'Profile has been created');
         }
