@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Author;
 
+use App\Models\Profile_Sympozia;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class AuthorDetail extends Component
@@ -41,7 +43,7 @@ class AuthorDetail extends Component
         return view('livewire.author.author-detail');
     }
 
-    public function checkMe()
+    public function addAuthor()
     {
         $this->validate();
         $this->emit('grabAuthors', [
@@ -61,5 +63,12 @@ class AuthorDetail extends Component
             'author_ct',
             'author_co',
         ]);
+    }
+
+    public function prefillAuthor()
+    {
+        $this->author_fn = Profile_Sympozia::where('user_id', Auth::id())->first()->first_name;
+        $this->author_ln = Profile_Sympozia::where('user_id', Auth::id())->first()->last_name;
+        $this->author_ml = Auth::user()->email;
     }
 }
