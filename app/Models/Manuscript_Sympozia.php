@@ -20,4 +20,14 @@ class Manuscript_Sympozia extends Model
     {
         return $this->hasOne(ManuscriptAuthor_sympozia::class, 'manuscript_id', 'id');
     }
+
+    public function status()
+    {
+        return $this->hasOne(ManuscriptStatus_sympozia::class, 'id', 'status_id');
+    }
+
+    public function milestone()
+    {
+        return $this->hasOne(ManuscriptMilestone_sympozia::class, 'id', 'milestone_id');
+    }
 }

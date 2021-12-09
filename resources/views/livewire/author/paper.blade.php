@@ -1,17 +1,13 @@
 <div>
     @if (!auth()->user()->manuscript->isEmpty())
-        <div class="table-responsive users-table">
-            <table class="table table-striped table-sm data-table">
-                <thead class="thead">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="bg-dark">
                     <tr>
-                        <th width="30%">Title</th>
-                        <th class="text-center" width="10%">Status</th>
-                        <th class="text-center" width="5%">Edit</th>
-                        <th class="text-center" width="5%">Authors</th>
-                        <th class="text-center" width="5%">Withdraw</th>
-                        <th class="text-center" width="5%">Copyright</th>
-                        <th class="text-center" width="5%">Review</th>
-                        <th class="text-center" width="5%">Final</th>
+                        <th>Title</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Milestone</th>
+                        <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody id="users-table">
@@ -21,38 +17,30 @@
                                 {{ $paper->title }}
                             </td>
                             <td class="text-center">
-                                status
+                                @if ($paper->status()->first()->code == 'SUB')
+                                    <span class="badge bg-primary">{{ $paper->status()->first()->description }}</span>
+                                @elseif ($paper->status()->first()->code == 'REV')
+                                    <span class="badge bg-danger">{{ $paper->status()->first()->description }}</span>
+                                @elseif ($paper->status()->first()->code == 'ACC')
+                                    <span class="badge bg-success">{{ $paper->status()->first()->description }}</span>
+                                @endif
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-xs">
-                                    <i class="fas fa-edit"></i>
-                                </button>
+                                @if ($paper->milestone()->first()->code == 'WRV')
+                                    <span
+                                        class="badge bg-secondary">{{ $paper->milestone()->first()->description }}</span>
+                                @elseif ($paper->milestone()->first()->code == 'IRV')
+                                    <span
+                                        class="badge bg-warning">{{ $paper->milestone()->first()->description }}</span>
+                                @elseif ($paper->milestone()->first()->code == 'CRV')
+                                    <span
+                                        class="badge bg-success">{{ $paper->milestone()->first()->description }}</span>
+                                @endif
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-xs">
-                                    <i class="fas fa-user-edit"></i>
-                                </button>
-                            </td>
-                            <td class="text-center">
-                                <button class="btn btn-xs">
-                                    <i class="fas fa-minus-circle" style="color: red"></i>
-                                </button>
-                            </td>
-                            <td class="text-center">
-                                <button class="btn btn-xs">
-                                    <i class="far fa-copyright"></i>
-                                </button>
-
-                            </td>
-                            <td class="text-center">
-                                <button class="btn btn-xs">
-                                    <i class="far fa-file"></i>
-                                </button>
-                            </td class="text-center">
-                            <td class="text-center">
-                                <button class="btn btn-xs">
-                                    <i class="far fa-file-alt"></i>
-                                </button>
+                                <a href="#" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-eye"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
