@@ -129,6 +129,14 @@
                     @endforeach
                 </x-adminlte-select>
 
+                <x-adminlte-select name="scope_selected" label="Scope" id='scope_selected'
+                    class="{{ $errors->has('scope_selected') ? 'is-invalid' : '' }}" wire:model='scope_selected'>
+                    <option hidden>--- Select the topic scope ---</option>
+                    @foreach ($scopes as $scope)
+                        <option value="{{ $scope }}">{{ $scope }}</option>
+                    @endforeach
+                </x-adminlte-select>
+
                 <x-adminlte-input name="presenter" error-key="presenter" type="text"
                     class="{{ $errors->has('presenter') ? 'is-invalid' : '' }}" label="Presenter"
                     placeholder="Presenter Name" wire:model="presenter" autocomplete="off" />

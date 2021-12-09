@@ -20,6 +20,7 @@ class CreateSympoziaManuscriptAuthorTable extends Migration
             $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('users');
             $table->string('presenter');
+            $table->string('scope');
             $table->string('contact');
             $table->json('author_list');
             $table->timestamps();

@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Author;
 use App\Models\Conferences_Sympozia;
 use App\Models\ManuscriptAuthor_Sympozia;
 use App\Models\ManuscriptFile_Sympozia;
+use App\Models\ManuscriptMilestone_Sympozia;
+use App\Models\ManuscriptStatus_Sympozia;
 use App\Models\Manuscript_Sympozia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -20,6 +22,7 @@ class PaperAdd extends Component
     public $authors = array();
     public $author_fullname;
     public $conferences_name;
+    public $scope_selected;
     public $presenter;
     public $presenter_contact;
     public $manuscript_file;
@@ -34,10 +37,16 @@ class PaperAdd extends Component
         'keywords' => 'required',
         'authors' => 'required',
         'conferences_name' => 'required',
+        'scope_selected' => 'required',
         'presenter' => 'required',
         'presenter_contact' => 'required|numeric',
         'manuscript_file' => 'required|file|max:2048|mimes:pdf',
     ];
+
+    public function mount()
+    {
+        $this->presenter = Auth::user()->name;
+    }
 
     public function updated($propertyName)
     {
@@ -52,7 +61,10 @@ class PaperAdd extends Component
 
     public function render()
     {
-        return view('livewire.author.paper-add', ['conferences' => Conferences_Sympozia::all()]);
+        return view('livewire.author.paper-add', [
+            'conferences' => Conferences_Sympozia::all(),
+            'scopes' => json_decode(Conferences_Sympozia::where('short_name', 'ISMEE2021')->first()->scope),
+        ]);
     }
 
     public function grabAuthors($authordata)
@@ -74,6 +86,7 @@ class PaperAdd extends Component
             'keywords' => $this->keywords,
             'authors' => $this->authors,
             'conferences_name' => $this->conferences_name,
+            'scope_selected' => $this->scope_selected,
             'presenter' => $this->presenter,
             'presenter_contact' => $this->presenter_contact,
             'manuscript_file' => $this->manuscript_file,
@@ -93,8 +106,8 @@ class PaperAdd extends Component
             'conferences_id' => Conferences_Sympozia::where('short_name', $this->conferences_name)->first()->id,
             'title' => $this->title,
             'abstract' => $this->abstract,
-            'milestone_id' => 1,
-            'status_id' => 1,
+            'milestone_id' => ManuscriptMilestone_Sympozia::where('code', 'WRV')->first()->id,
+            'status_id' => ManuscriptStatus_Sympozia::where('code', 'SUB')->first()->id,
         ]);
 
         // Handle Manuscript File
@@ -116,6 +129,7 @@ class PaperAdd extends Component
         ManuscriptAuthor_Sympozia::create([
             'manuscript_id' => $manuscript_user->id,
             'author_id' => Auth::user()->id,
+            'scope' => $this->scope_selected,
             'presenter' => $this->presenter,
             'contact' => $this->presenter_contact,
             'author_list' => json_encode($this->authors),
