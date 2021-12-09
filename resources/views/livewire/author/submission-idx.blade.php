@@ -1,5 +1,6 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('vendor/country-select/css/countrySelect.min.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/filepond-plugin-pdf-preview/dist/filepond-plugin-pdf-preview.min.css">
     <link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.css">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 @endsection
