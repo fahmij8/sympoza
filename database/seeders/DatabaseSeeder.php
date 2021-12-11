@@ -5,8 +5,11 @@ namespace Database\Seeders;
 use App\Models\Conferences_Sympozia;
 use App\Models\Config_Sympozia;
 use App\Models\FileType_sympozia;
+use App\Models\ManuscriptAuthor_Sympozia;
+use App\Models\ManuscriptFile_Sympozia;
 use App\Models\ManuscriptMilestone_Sympozia;
 use App\Models\ManuscriptStatus_Sympozia;
+use App\Models\Manuscript_Sympozia;
 use App\Models\ProfileTitle_Sympozia;
 use App\Models\Profile_Sympozia;
 use App\Models\Role;
@@ -20,6 +23,17 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+
+    // Sympozia Conferences
+    public $scopes = [
+        "Engineered materials, Dielectrics, and Plasmas",
+        "Telecommunication, and Networking",
+        "Component, circuit and devices",
+        "Power Energy and Industry application",
+        "Computing and processing",
+        "Electrical Engineering Education",
+    ];
+
     public function run()
     {
         // Roles
@@ -54,20 +68,11 @@ class DatabaseSeeder extends Seeder
             'status' => '1',
         ]);
 
-        // Sympozia Conferences
-        $scopes = [
-            "Engineered materials, Dielectrics, and Plasmas",
-            "Telecommunication, and Networking",
-            "Component, circuit and devices",
-            "Power Energy and Industry application",
-            "Computing and processing",
-            "Electrical Engineering Education",
-        ];
-
+        // Initial conferences data
         Conferences_Sympozia::create([
             'name' => 'The 3rd International Symposium on Materials and Electrical Engineering',
             'short_name' => 'ISMEE2021',
-            'scope' => json_encode($scopes),
+            'scope' => json_encode($this->scopes),
         ]);
 
         // Sympozia file type
@@ -158,6 +163,17 @@ class DatabaseSeeder extends Seeder
         // Additional User
         User::factory()->count(3)->create()->each(function ($user) {
             $user->roles()->attach(Role::where('name', 'author')->first());
+        });
+
+        // Initial Paper
+        Manuscript_Sympozia::factory()->count(100)->create()->each(function ($manuscript) {
+            ManuscriptAuthor_Sympozia::factory()->create([
+                'manuscript_id' => $manuscript->id,
+                'author_id' => $manuscript->user_id,
+            ]);
+            ManuscriptFile_Sympozia::factory()->create([
+                'manuscript_id' => $manuscript->id,
+            ]);
         });
     }
 }
