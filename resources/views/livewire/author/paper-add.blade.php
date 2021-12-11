@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <x-adminlte-button label='Next' theme="primary" icon="fas fa-chevron-circle-right mr-1"
-                    class="rounded-pill stepper-next" />
+                    class="stepper-next btn-sm" />
             </div>
             <div id="submission-author" class="content" role="tabpanel"
                 aria-labelledby="submission-author-trigger" wire:ignore.self>
@@ -115,9 +115,9 @@
                     @enderror
                 </div>
                 <x-adminlte-button label='Previous' theme="primary" icon="fas fa-chevron-circle-left mr-1"
-                    class="rounded-pill stepper-prev" />
+                    class="stepper-prev btn-sm" />
                 <x-adminlte-button label='Next' theme="primary" icon="fas fa-chevron-circle-right mr-1"
-                    class="rounded-pill stepper-next" />
+                    class="stepper-next btn-sm" />
             </div>
             <div id="submission-file" class="content" role="tabpanel" aria-labelledby="submission-file-trigger"
                 wire:ignore.self>
@@ -148,13 +148,12 @@
                 <x-filepond wire:model="manuscript_file" key='manuscript_file' />
 
                 <x-adminlte-button label='Previous' theme="primary" icon="fas fa-chevron-circle-left mr-1"
-                    class="rounded-pill stepper-prev" />
-                <div class="form-group">
-                    <button wire:click="submitManuscript" class="btn btn-success d-block ml-auto"> <i
-                            class="fas fa-save"></i>
-                        Add Paper Submission
-                    </button>
-                </div>
+                    class="stepper-prev btn-sm" />
+                <button wire:click="submitManuscript" class="btn btn-success btn-sm float-right"> <i
+                        class="fas fa-save"></i>
+                    Add Paper Submission
+                </button>
+
             </div>
         </div>
     </div>
