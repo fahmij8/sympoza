@@ -43,7 +43,7 @@
 @endif
 
 <script>
-    const callAlert = () => {
+    var callAlert = () => {
         $('.alert').hide().fadeIn('fast').delay(5000).fadeOut('slow', function() {
             $('.alert').remove();
         });
