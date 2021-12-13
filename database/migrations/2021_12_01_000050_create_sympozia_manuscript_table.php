@@ -19,8 +19,9 @@ class CreateSympoziaManuscriptTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('conferences_id');
             $table->foreign('conferences_id')->references('id')->on('sympozia_conferences');
-            $table->string('title');
-            $table->text('abstract');
+            $table->string('title')->unique();
+            $table->text('abstract')->unique();
+            $table->json('keywords')->unique();
             $table->unsignedBigInteger('milestone_id');
             $table->foreign('milestone_id')->references('id')->on('sympozia_manuscript_milestone')->onDelete('cascade');
             $table->unsignedBigInteger('status_id');
