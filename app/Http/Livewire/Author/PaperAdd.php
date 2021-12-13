@@ -32,9 +32,9 @@ class PaperAdd extends Component
     ];
 
     protected $rules = [
-        'title' => 'required',
-        'abstract' => 'required',
-        'keywords' => 'required',
+        'title' => 'required|unique:sympozia_manuscript,title',
+        'abstract' => 'required|unique:sympozia_manuscript,abstract',
+        'keywords' => 'required|unique:sympozia_manuscript,keywords',
         'authors' => 'required',
         'conferences_name' => 'required',
         'scope_selected' => 'required',
@@ -98,19 +98,19 @@ class PaperAdd extends Component
             return;
         }
 
-        $manuscript_user_filename = $this->conferences_name . '-' . Auth::user()->id . '-' . now()->format('YmdHis') . '-' . 'manuscript.pdf';
-
         // Handle Manuscript Info
         $manuscript_user = Manuscript_Sympozia::create([
             'user_id' => Auth::user()->id,
             'conferences_id' => Conferences_Sympozia::where('short_name', $this->conferences_name)->first()->id,
             'title' => $this->title,
+            'keywords' => $this->keywords,
             'abstract' => $this->abstract,
-            'milestone_id' => ManuscriptMilestone_Sympozia::where('code', 'WRV')->first()->id,
-            'status_id' => ManuscriptStatus_Sympozia::where('code', 'SUB')->first()->id,
+            'milestone_id' => ManuscriptMilestone_Sympozia::where('code', 'SUB')->first()->id,
+            'status_id' => ManuscriptStatus_Sympozia::where('code', 'WRV')->first()->id,
         ]);
 
         // Handle Manuscript File
+        $manuscript_user_filename = $this->conferences_name . '-' . Auth::user()->id . '-' . $manuscript_user->id . '-' . 'manuscript.pdf';
         $public_filename = $this->manuscript_file->storeAs('submitedManuscript', $manuscript_user_filename, 'public');
         $file = [
             'manuscript_id' => $manuscript_user->id,
