@@ -17,13 +17,13 @@ class Manuscript_SympoziaFactory extends Factory
 
     protected function generateMilestoneId()
     {
-        $this->status_id = $this->faker->numberBetween(1, 3);
-        return $this->status_id;
+        $this->milestone_id = $this->faker->numberBetween(1, 4);
+        return $this->milestone_id;
     }
 
-    protected function generateStatusId($status_id)
+    protected function generateStatusId($milestone_id)
     {
-        if ($status_id == 1) {
+        if ($milestone_id == 1) {
             $this->status_id = $this->faker->numberBetween(1, 2);
             return $this->status_id;
         } else {
@@ -41,7 +41,7 @@ class Manuscript_SympoziaFactory extends Factory
             'abstract' => $this->faker->paragraph(rand(4, 8)),
             'keywords' => json_encode($this->faker->words(rand(1, 4))),
             'milestone_id' => $this->generateMilestoneId(),
-            'status_id' => $this->generateStatusId($this->status_id),
+            'status_id' => $this->generateStatusId($this->milestone_id),
         ];
     }
 }

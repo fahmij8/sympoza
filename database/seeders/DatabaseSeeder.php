@@ -107,6 +107,11 @@ class DatabaseSeeder extends Seeder
             'description' => 'Need Revision',
         ]);
 
+        ManuscriptMilestone_Sympozia::create([
+            'code' => 'REJ',
+            'description' => 'Rejected',
+        ]);
+
         // Sympozia Manuscript Status
         ManuscriptStatus_Sympozia::create([
             'code' => 'WRV',
