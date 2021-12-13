@@ -29,9 +29,9 @@
                 class="{{ $errors->has('author_co') ? 'is-invalid' : '' }}" wire:model='author_co'>
                 <x-adminlte-options :options="['No'=>'No', 'Yes'=>'Yes']" placeholder=" Select an option..." />
             </x-adminlte-select>
-            <x-adminlte-button class="btn-sm bg-gradient-info ml-2 mb-2 mt-n1" type="button" label="Add Author Data"
+            <x-adminlte-button class="btn-sm bg-gradient-dark ml-2 mb-2 mt-n1" type="button" label="Add Author Data"
                 icon="fas fa-user-plus mr-1" wire:click='addAuthor' />
-            <x-adminlte-button class="btn-sm btn-outline-info ml-2 mb-2 mt-n1" type="button" label="Use my data"
+            <x-adminlte-button class="btn-sm btn-outline-dark ml-2 mb-2 mt-n1" type="button" label="Use my data"
                 icon="fas fa-user-tie mr-1" wire:click='prefillAuthor' />
         </div>
     </div>
