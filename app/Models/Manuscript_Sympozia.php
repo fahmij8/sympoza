@@ -13,7 +13,7 @@ class Manuscript_Sympozia extends Model
 
     public function file()
     {
-        return $this->hasOne(ManuscriptFile_sympozia::class, 'manuscript_id', 'id');
+        return $this->hasMany(ManuscriptFile_sympozia::class, 'manuscript_id', 'id');
     }
 
     public function authors()
