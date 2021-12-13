@@ -146,3 +146,7 @@
   flex-direction: row-reverse;
   max-width: 300px;
 }
+
+[x-cloak] {
+  display: none !important;
+}
