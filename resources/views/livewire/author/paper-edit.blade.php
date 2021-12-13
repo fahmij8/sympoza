@@ -39,7 +39,7 @@
                             {{ $selectedPaper->title }}
                             {{ $selectedPaper->abstract }}
                             {{ $selectedPaper->keywords }}
-                            {{ $selectedPaper->file->name }}
+                            {{ $selectedPaper->file }}
                         </div>
                     </div>
                 </div>
