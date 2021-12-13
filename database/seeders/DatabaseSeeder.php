@@ -83,7 +83,7 @@ class DatabaseSeeder extends Seeder
 
         FileType_sympozia::create([
             'code' => 'FUL',
-            'description' => 'Full manuscript',
+            'description' => 'Full paper',
         ]);
 
         FileType_sympozia::create([
@@ -93,34 +93,39 @@ class DatabaseSeeder extends Seeder
 
         // Sympozia milestone
         ManuscriptMilestone_Sympozia::create([
-            'code' => 'WRV',
-            'description' => 'Awaiting Review',
-        ]);
-
-        ManuscriptMilestone_Sympozia::create([
-            'code' => 'IRV',
-            'description' => 'Review in Progress',
-        ]);
-
-        ManuscriptMilestone_Sympozia::create([
-            'code' => 'CRV',
-            'description' => 'Review Completed',
-        ]);
-
-        // Sympozia Manuscript Status
-        ManuscriptStatus_Sympozia::create([
             'code' => 'SUB',
             'description' => 'Submitted',
         ]);
 
-        ManuscriptStatus_Sympozia::create([
+        ManuscriptMilestone_Sympozia::create([
             'code' => 'ACC',
             'description' => 'Accepted',
         ]);
 
-        ManuscriptStatus_Sympozia::create([
+        ManuscriptMilestone_Sympozia::create([
             'code' => 'REV',
             'description' => 'Need Revision',
+        ]);
+
+        ManuscriptMilestone_Sympozia::create([
+            'code' => 'REJ',
+            'description' => 'Rejected',
+        ]);
+
+        // Sympozia Manuscript Status
+        ManuscriptStatus_Sympozia::create([
+            'code' => 'WRV',
+            'description' => 'Awaiting Review',
+        ]);
+
+        ManuscriptStatus_Sympozia::create([
+            'code' => 'IRV',
+            'description' => 'Review in Progress',
+        ]);
+
+        ManuscriptStatus_Sympozia::create([
+            'code' => 'CRV',
+            'description' => 'Review Completed',
         ]);
 
         // Sympozia Profile Title
@@ -162,11 +167,17 @@ class DatabaseSeeder extends Seeder
 
         // Additional User
         User::factory()->count(3)->create()->each(function ($user) {
+            Profile_Sympozia::create([
+                'user_id' => $user->id,
+                'first_name' => explode(' ', $user->name)[0],
+                'last_name' => explode(' ', $user->name)[1],
+                'email' => $user->email,
+            ]);
             $user->roles()->attach(Role::where('name', 'author')->first());
         });
 
-        // Initial Paper
-        Manuscript_Sympozia::factory()->count(100)->create()->each(function ($manuscript) {
+        // Initial Paper for development purposes only
+        Manuscript_Sympozia::factory()->count(25)->create()->each(function ($manuscript) {
             ManuscriptAuthor_Sympozia::factory()->create([
                 'manuscript_id' => $manuscript->id,
                 'author_id' => $manuscript->user_id,

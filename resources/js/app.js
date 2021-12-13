@@ -2,7 +2,6 @@ import "bs-stepper/dist/css/bs-stepper.min.css";
 import "@yaireo/tagify/dist/tagify.css";
 import Stepper from "bs-stepper";
 import Tagify from "@yaireo/tagify";
-import bsCustomFileInput from "bs-custom-file-input";
 
 // Function Helper
 const initAddPaper = () => {
@@ -34,8 +33,6 @@ const initAddPaper = () => {
         let widthDropdown = $(".country-select").width();
         $(".country-list").width(widthDropdown - 4);
     });
-
-    bsCustomFileInput.init();
 };
 
 // window.addEventListener("popstate", function (event) {
@@ -56,6 +53,8 @@ document.addEventListener("livewire:load", function () {
 
 // Pathname handler
 let pathName = window.location.pathname;
-if (pathName === "/author/submission/add") {
-    initAddPaper();
-}
+window.addEventListener("DOMContentLoaded", function () {
+    if (pathName === "/author/submission/add") {
+        initAddPaper();
+    }
+});

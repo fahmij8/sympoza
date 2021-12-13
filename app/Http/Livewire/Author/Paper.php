@@ -14,17 +14,13 @@ class Paper extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $id_toDelete = null;
+    public $id_toEdit = null;
 
     public function render()
     {
         return view('livewire.author.paper', [
             'manuscripts' => Manuscript_Sympozia::where('user_id', auth()->user()->id)->paginate(10),
         ]);
-    }
-
-    public function editSubmission($id)
-    {
-        dd($id);
     }
 
     public function deleteSubmission($id)

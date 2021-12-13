@@ -11,9 +11,9 @@ class ManuscriptAuthor_SympoziaFactory extends Factory
      *
      * @return array
      */
-    public $authorList = array();
+    protected $authorList = array();
 
-    public function generateAuthor()
+    protected function generateAuthor()
     {
         array_push($this->authorList, [
             'author_fn' => ucwords($this->faker->firstName),
