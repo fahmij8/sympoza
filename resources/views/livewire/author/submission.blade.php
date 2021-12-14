@@ -2,7 +2,6 @@
     <div wire:loading.block>
         <x-loading></x-loading>
     </div>
-    @include('livewire.message.message')
     @if ($action == null)
         <div class="row">
             <div class="col-sm-12 offset-sm-0">

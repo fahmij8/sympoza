@@ -1,11 +1,20 @@
 <div>
     <x-adminlte-modal id="deleteSubmission" title="Are you sure?" theme="danger" icon="fas fa-exclamation-triangle"
         size='lg' v-centered static-backdrop wire:ignore.self>
-        Are you sure you want to delete this submission?
-        <x-slot name="footerSlot">
-            <x-adminlte-button theme="danger" label="Dismiss" data-dismiss="modal" />
-            <x-adminlte-button theme="success" label="Accept" data-dismiss="modal"
-                wire:click='deleteSubmission({{ $id_toDelete }})' />
-        </x-slot>
+        @if ($selectedPaper != null)
+            Are you sure you want to delete <strong>{{ $selectedPaper->title }}</strong> submission?
+            <x-slot name="footerSlot">
+                <x-adminlte-button theme="danger" label="Dismiss" data-dismiss="modal" />
+                <x-adminlte-button theme="success" label="Accept" data-dismiss="modal"
+                    wire:click='confirmDeletePaper({{ $selectedPaper }})' />
+            </x-slot>
+        @else
+            Please wait...
+        @endif
     </x-adminlte-modal>
+    <script>
+        $('#deleteSubmission').on('hidden.bs.modal', function(event) {
+            Livewire.emit('deletePaper', null);
+        })
+    </script>
 </div>

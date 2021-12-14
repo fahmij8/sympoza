@@ -10,6 +10,8 @@ use Rappasoft\LaravelLivewireTables\Views\Filter;
 
 class SubmissionTable extends DataTableComponent
 {
+    public $refresh = false;
+    protected $listeners = ['refreshTable'];
 
     public function columns(): array
     {
@@ -58,5 +60,20 @@ class SubmissionTable extends DataTableComponent
     public function setTableClass(): ?string
     {
         return "table table-bordered table-hover table-valign-middle";
+    }
+
+    public function refreshTable()
+    {
+        $this->refresh = !$this->refresh;
+    }
+
+    public function editPaper($id)
+    {
+        $this->emit('editPaper', $id);
+    }
+
+    public function deletePaper($id)
+    {
+        $this->emit('deletePaper', $id);
     }
 }
