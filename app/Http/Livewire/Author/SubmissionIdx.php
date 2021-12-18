@@ -9,11 +9,9 @@ use Livewire\Component;
 
 class SubmissionIdx extends Component
 {
-    public $routeName;
 
     public function render()
     {
-        $this->routeName = Route::currentRouteName();
         return view('livewire.author.submission-idx')->layout('adminlte::page');
     }
 

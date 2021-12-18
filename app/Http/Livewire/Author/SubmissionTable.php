@@ -48,6 +48,7 @@ class SubmissionTable extends DataTableComponent
     public function query(): Builder
     {
         return Manuscript_Sympozia::query()
+            ->where('user_id', auth()->user()->id)
             ->when($this->getFilter('milestone'), fn($query, $type) => $query->where('milestone_id', $type))
             ->when($this->getFilter('status'), fn($query, $type) => $query->where('status_id', $type));
     }
