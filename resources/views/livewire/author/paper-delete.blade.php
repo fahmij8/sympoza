@@ -12,9 +12,4 @@
             Please wait...
         @endif
     </x-adminlte-modal>
-    <script>
-        $('#deleteSubmission').on('hidden.bs.modal', function(event) {
-            Livewire.emit('deletePaper', null);
-        })
-    </script>
 </div>
