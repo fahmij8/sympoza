@@ -31,6 +31,7 @@ Route::get('/home', \App\Http\Livewire\Index::class)->name('home')->middleware([
 Route::get('/author', \App\Http\Livewire\Author\Idx::class)->name('author.home')->middleware(['auth']);
 Route::get('/author/submission', \App\Http\Livewire\Author\SubmissionIdx::class)->name('author.submission')->middleware(['auth']);
 Route::get('/author/submission/add', \App\Http\Livewire\Author\SubmissionIdx::class)->name('author.submission.add')->middleware(['auth']);
+Route::get('/author/submission/edit/{id}', \App\Http\Livewire\Author\SubmissionIdx::class)->name('author.submission.edit')->whereNumber('id')->middleware(['auth']);
 Route::get('/admin', \App\Http\Livewire\Admin\Idx::class)->name('admin.home')->middleware(['auth']);
 Route::get('/committee', \App\Http\Livewire\Committee\Idx::class)->name('committee.home')->middleware(['auth']);
 Route::get('/committee/news', \App\Http\Livewire\Committee\NewsIdx::class)->name('committee.news')->middleware(['auth']);
