@@ -34,7 +34,7 @@ class PaperAdd extends Component
     protected $rules = [
         'title' => 'required|unique:sympozia_manuscript,title',
         'abstract' => 'required|unique:sympozia_manuscript,abstract',
-        'keywords' => 'required|unique:sympozia_manuscript,keywords',
+        'keywords' => 'required',
         'authors' => 'required',
         'conferences_name' => 'required',
         'scope_selected' => 'required',
@@ -136,8 +136,7 @@ class PaperAdd extends Component
         ]);
 
         $this->resetInput();
-        session()->flash('success', 'Manuscript Submitted Successfully');
-        return redirect()->route('author.submission');
+        return redirect()->route('author.submission')->with('success', 'Manuscript Submitted Successfully');
     }
 
     public function resetInput()
