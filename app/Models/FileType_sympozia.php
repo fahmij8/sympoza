@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class FileType_Sympozia extends Model
 {
     use HasFactory;
-    protected $table = 'sympozia_file_type';
     protected $guarded = [];
+    protected $table = 'sympozia_file_type';
 }
