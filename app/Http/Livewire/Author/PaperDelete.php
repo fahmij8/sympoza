@@ -29,12 +29,13 @@ class PaperDelete extends Component
         });
         Manuscript_Sympozia::find($id)->first()->delete();
 
-        if (Manuscript_Sympozia::all()->count() == 0) {
-            return redirect()->route('author.submission')->with('success', 'Paper deleted successfully!');
+        if ($this->selectedPaper->where('user_id', auth()->user()->id)->count() == 0) {
+            $this->selectedPaper = null;
+            $this->emit('refreshPaperAfterDelete');
         } else {
+            $this->selectedPaper = null;
             $this->emit('refreshPaperAfterDelete');
             $this->emit('refreshTable');
-            $this->selectedPaper = null;
         }
     }
 
