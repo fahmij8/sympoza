@@ -1,10 +1,14 @@
 <div>
+    @include('livewire.message.message')
     <div wire:loading.block wire:target='submitManuscript'>
         <x-loading></x-loading>
     </div>
-    <h5 class="text-bold">.: Add Paper</h5>
+    <div class="d-flex align-items-center">
+        <button class="btn bg-gradient-gray-dark btn-sm mr-2 rounded-circle shadow-sm"
+            wire:click='$emit("grabAction", null)'><i class="fas fa-chevron-circle-left"></i></button>
+        <h5 class="text-bold mb-0">.: Add Paper</h5>
+    </div>
     <hr>
-    @include('livewire.message.message')
     <div class="bs-stepper" wire:ignore.self>
         <div class="bs-stepper-header" role="tablist" wire:ignore>
             <div class="step" data-target="#submission-info">
@@ -145,7 +149,7 @@
                     class="{{ $errors->has('presenter_contact') ? 'is-invalid' : '' }}" label="Presenter Contact"
                     placeholder="Presenter Phone Number" wire:model="presenter_contact" autocomplete="off" />
 
-                <x-filepond wire:model="manuscript_file" key='manuscript_file' />
+                <x-filepond wire:model="manuscript_file" key='manuscript_file' title='Manuscript File' />
 
                 <x-adminlte-button label='Previous' theme="primary" icon="fas fa-chevron-circle-left mr-1"
                     class="stepper-prev btn-sm" />

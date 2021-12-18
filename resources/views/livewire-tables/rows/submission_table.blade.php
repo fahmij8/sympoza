@@ -25,12 +25,13 @@
 
 <x-livewire-tables::bs4.table.cell width='5%' class="text-center">
     <div class="btn-group shadow-sm">
-        <a href="{{ Storage::disk('local')->url($row->file()->first()->name) }}" target="_blank"
-            class="btn btn-default">
+        <a href="{{ Storage::disk('local')->url(
+            $row->file()->where('file_type', 1)->first()->name ?? 404,
+        ) }}"
+            target="_blank" class="btn btn-default">
             <i class="far fa-eye fa-xs"></i>
         </a>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editSubmission"
-            wire:click="editPaper({{ $row->id }})"
+        <button class="btn btn-default" wire:click='$emit("show-edit", {{ $row->id }})'
             {{ $statuses == 'IRV' || $milestones == 'REJ' ? 'disabled' : '' }}>
             <i class="far fa-edit fa-xs text-blue"></i>
         </button>
