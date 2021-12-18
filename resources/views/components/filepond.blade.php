@@ -20,8 +20,8 @@
         $('.filepond--root').addClass('mb-1');
     }">
     <div class="form-group mb-0" wire:ignore>
-        <label for="{{ $attributes->whereStartsWith('key')->first() }}">
-            {{ ucwords($attributes->whereStartsWith('key')->first()) }}
+        <label for="{{ $attributes->whereStartsWith('title')->first() }}">
+            {{ ucwords($attributes->whereStartsWith('title')->first()) }}
         </label>
         <input type="file" x-ref="input" />
     </div>
