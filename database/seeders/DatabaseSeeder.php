@@ -5,11 +5,8 @@ namespace Database\Seeders;
 use App\Models\Conferences_Sympozia;
 use App\Models\Config_Sympozia;
 use App\Models\FileType_sympozia;
-use App\Models\ManuscriptAuthor_Sympozia;
-use App\Models\ManuscriptFile_Sympozia;
 use App\Models\ManuscriptMilestone_Sympozia;
 use App\Models\ManuscriptStatus_Sympozia;
-use App\Models\Manuscript_Sympozia;
 use App\Models\ProfileTitle_Sympozia;
 use App\Models\Profile_Sympozia;
 use App\Models\Role;
@@ -174,17 +171,6 @@ class DatabaseSeeder extends Seeder
                 'email' => $user->email,
             ]);
             $user->roles()->attach(Role::where('name', 'author')->first());
-        });
-
-        // Initial Paper for development purposes only
-        Manuscript_Sympozia::factory()->count(25)->create()->each(function ($manuscript) {
-            ManuscriptAuthor_Sympozia::factory()->create([
-                'manuscript_id' => $manuscript->id,
-                'author_id' => $manuscript->user_id,
-            ]);
-            ManuscriptFile_Sympozia::factory()->create([
-                'manuscript_id' => $manuscript->id,
-            ]);
         });
     }
 }

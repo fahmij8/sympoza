@@ -30,4 +30,9 @@ class Manuscript_Sympozia extends Model
     {
         return $this->hasOne(ManuscriptMilestone_sympozia::class, 'id', 'milestone_id');
     }
+
+    public function conferences()
+    {
+        return $this->hasOne(Conferences_sympozia::class, 'id', 'conferences_id');
+    }
 }

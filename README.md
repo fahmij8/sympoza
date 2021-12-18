@@ -2,6 +2,12 @@
 
 ## Sympozia Project
 
+### Assignments
+
+-   [x] Add paper feature
+-   [x] View paper feature
+-   [ ] Edit paper feature (WIP)
+
 Usage :
 
 -   Install php dependencies (composer)
@@ -28,4 +34,10 @@ php artisan key:generate
 
 ```
 php artisan serve
+```
+
+-   In case of the storage file not readable, please run this command to link the storage to public
+
+```
+php artisan storage:link
 ```

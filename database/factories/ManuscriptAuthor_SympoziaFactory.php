@@ -40,7 +40,7 @@ class ManuscriptAuthor_SympoziaFactory extends Factory
                 "Electrical Engineering Education",
             ]),
             'presenter' => $this->faker->name,
-            'contact' => $this->faker->phoneNumber,
+            'contact' => $this->faker->e164PhoneNumber,
             'author_list' => json_encode($this->authorList),
         ];
     }

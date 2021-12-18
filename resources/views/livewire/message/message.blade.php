@@ -1,5 +1,21 @@
 @section('css')
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <style type="text/css">
+        .alert-float {
+            position: fixed;
+            bottom: 5px;
+            right: 10px;
+            z-index: 99999;
+            margin-left: 10px;
+        }
+
+        .alert-float-container {
+            display: flex;
+            align-items: center;
+            flex-direction: row-reverse;
+            max-width: 300px;
+        }
+
+    </style>
 @endsection
 
 @if ($message = Session::get('success'))
@@ -44,7 +60,7 @@
 
 <script>
     var callAlert = () => {
-        $('.alert').hide().fadeIn('fast').delay(5000).fadeOut('slow', function() {
+        $('.alert').hide().fadeIn('slow').delay(5000).fadeOut('slow', function() {
             $('.alert').remove();
         });
     }

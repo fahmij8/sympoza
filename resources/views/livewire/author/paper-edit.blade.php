@@ -101,12 +101,18 @@
                     </div>
                 @endif
             </div>
+            <x-slot name="footerSlot">
+                <x-adminlte-button theme="danger" label="Dismiss" data-dismiss="modal" />
+                <x-adminlte-button theme="success" label="Accept" data-dismiss="modal" />
+            </x-slot>
+        @else
+            Please wait ...
         @endif
-        <x-slot name="footerSlot">
-            <x-adminlte-button theme="danger" label="Dismiss" data-dismiss="modal" />
-            <x-adminlte-button theme="success" label="Accept" data-dismiss="modal" />
-        </x-slot>
     </x-adminlte-modal>
-
+    <script>
+        $('#editSubmission').on('hidden.bs.modal', function(event) {
+            Livewire.emit('editPaper', null);
+        })
+    </script>
 
 </div>

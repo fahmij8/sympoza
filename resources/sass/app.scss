@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 .loading-bg {
     height: 100%;
     position: absolute;
@@ -148,6 +152,7 @@
     flex-direction: row-reverse;
     max-width: 300px;
 }
+
 [x-cloak] {
     display: none !important;
 }

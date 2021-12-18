@@ -30,12 +30,12 @@
             <i class="far fa-eye fa-xs"></i>
         </a>
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editSubmission"
-            wire:click="$emitTo('author.paper-edit','editPaper',{{ $row->id }})"
-            {{ $statuses == 'IRV' ? 'disabled' : '' }}>
+            wire:click="editPaper({{ $row->id }})"
+            {{ $statuses == 'IRV' || $milestones == 'REJ' ? 'disabled' : '' }}>
             <i class="far fa-edit fa-xs text-blue"></i>
         </button>
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#deleteSubmission"
-            wire:click="$set('id_toDelete','{{ $row->id }}')" {{ $statuses == 'IRV' ? 'disabled' : '' }}>
+            wire:click="deletePaper({{ $row->id }})" {{ $statuses == 'IRV' ? 'disabled' : '' }}>
             <i class="fas fa-trash fa-xs text-red"></i>
         </button>
     </div>

@@ -1,7 +1,5 @@
 <div>
-    @section('plugins.Datatables', true)
-    @include('livewire.author.paper-delete')
-    @livewire('author.paper-edit')
+    @include('livewire.message.message')
     <h5 class="text-bold">.: Submission List</h5>
     <hr>
     @if (auth()->user()->manuscript->isEmpty())
@@ -9,6 +7,8 @@
         <h4 class="text-center mt-3 mb-0">Oh no!</h4>
         <p class="text-center mt-0">No paper data is submitted, lets add one.</p>
     @else
-        <livewire:author.submission-table>
+        @livewire('author.paper-delete')
+        @livewire('author.paper-edit')
+        @livewire('author.submission-table')
     @endif
 </div>
