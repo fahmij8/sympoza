@@ -6,7 +6,7 @@
 
 -   [x] Add paper feature
 -   [x] View paper feature
--   [ ] Edit paper feature (WIP)
+-   [x] Edit paper feature
 
 Usage :
 
@@ -20,7 +20,7 @@ composer install
 -   Migrate & seed initial database
 
 ```
-php artisan migrate:refresh --seed
+php artisan migrate:fresh --seed
 ```
 
 -   Rename `.env.example` to `.env`
@@ -36,7 +36,7 @@ php artisan key:generate
 php artisan serve
 ```
 
--   In case of the storage file not readable, please run this command to link the storage to public
+-   In case of the storage file is not readable, please run this command to link the storage to public
 
 ```
 php artisan storage:link
