@@ -24,10 +24,11 @@ class PaperDelete extends Component
 
     public function confirmDeletePaper($id)
     {
-        Manuscript_Sympozia::find($id)->first()->file->each(function ($file) {
+        Manuscript_Sympozia::where('id', $id)->first()->file->each(function ($file) {
             Storage::disk('local')->delete('/public/' . $file->name);
         });
-        Manuscript_Sympozia::find($id)->first()->delete();
+
+        Manuscript_Sympozia::where('id', $id)->first()->delete();
 
         if ($this->selectedPaper->where('user_id', auth()->user()->id)->count() == 0) {
             $this->selectedPaper = null;
