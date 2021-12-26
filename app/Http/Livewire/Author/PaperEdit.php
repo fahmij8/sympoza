@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Author;
 
 use App\Models\Conferences_Sympozia;
-use App\Models\FileType_Sympozia;
+use App\Models\FileType_sympozia;
 use App\Models\ManuscriptFile_Sympozia;
 use App\Models\ManuscriptMilestone_Sympozia;
 use App\Models\Manuscript_Sympozia;
@@ -139,9 +139,9 @@ class PaperEdit extends Component
         // 2. Delete the old file on corresponding field
         // 3. Upload the new file
         // 4. Save the file to the database
-        $fileType_manuscript = FileType_Sympozia::where('code', 'REV')->first()->id;
-        $fileType_copyright = FileType_Sympozia::where('code', 'COP')->first()->id;
-        $fileType_final_paper = FileType_Sympozia::where('code', 'FUL')->first()->id;
+        $fileType_manuscript = FileType_sympozia::where('code', 'REV')->first()->id;
+        $fileType_copyright = FileType_sympozia::where('code', 'COP')->first()->id;
+        $fileType_final_paper = FileType_sympozia::where('code', 'FUL')->first()->id;
         if ($this->manuscript_file != null) {
             $this->selectedPaper->file->where('file_type', $fileType_manuscript)->each(function ($file) {
                 $file->delete();
@@ -200,9 +200,9 @@ class PaperEdit extends Component
     {
         $isFailed = false;
         $message = array();
-        $fileType_manuscript = FileType_Sympozia::where('code', 'REV')->first()->id;
-        $fileType_copyright = FileType_Sympozia::where('code', 'COP')->first()->id;
-        $fileType_final_paper = FileType_Sympozia::where('code', 'FUL')->first()->id;
+        $fileType_manuscript = FileType_sympozia::where('code', 'REV')->first()->id;
+        $fileType_copyright = FileType_sympozia::where('code', 'COP')->first()->id;
+        $fileType_final_paper = FileType_sympozia::where('code', 'FUL')->first()->id;
 
         if (Manuscript_Sympozia::where('id', $this->selectedPaper->id)->first()->file->where('file_type', $fileType_manuscript)->count() == 0 && $this->manuscript_file == null) {
             $isFailed = true;
