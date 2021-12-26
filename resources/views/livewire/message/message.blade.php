@@ -19,7 +19,7 @@
 @endsection
 
 @if ($message = Session::get('success'))
-    <div class="alert alert-success alert-float" role="alert" x-data x-init="callAlert()">
+    <div class="alert alert-success alert-float" style="opacity:0" role="alert" x-data x-init="callAlert()">
         <div class="alert-float-container">
             <button type="button" class="close mt-1" data-dismiss="alert">×</button>
             <p class="mr-3 mb-0">{{ $message }}</p>
@@ -29,7 +29,7 @@
 @endif
 
 @if ($message = Session::get('error'))
-    <div class="alert alert-danger alert-float" role="alert" x-data x-init="callAlert()">
+    <div class="alert alert-danger alert-float" style="opacity:0" role="alert" x-data x-init="callAlert()">
         <div class="alert-float-container">
             <button type="button" class="close mt-1" data-dismiss="alert">×</button>
             <p class="mr-3 mb-0">{{ $message }}</p>
@@ -39,7 +39,7 @@
 @endif
 
 @if ($message = Session::get('warning'))
-    <div class="alert alert-warning alert-float" role="alert" x-data x-init="callAlert()">
+    <div class="alert alert-warning alert-float" style="opacity:0" role="alert" x-data x-init="callAlert()">
         <div class="alert-float-container">
             <button type="button" class="close mt-1" data-dismiss="alert">×</button>
             <p class="mr-3 mb-0">{{ $message }}</p>
@@ -49,7 +49,7 @@
 @endif
 
 @if ($message = Session::get('info'))
-    <div class="alert alert-info alert-float" role="alert" x-data x-init="callAlert()">
+    <div class="alert alert-info alert-float" style="opacity:0" role="alert" x-data x-init="callAlert()">
         <div class="alert-float-container">
             <button type="button" class="close mt-1" data-dismiss="alert">×</button>
             <p class="mr-3 mb-0">{{ $message }}</p>
@@ -60,8 +60,13 @@
 
 <script>
     var callAlert = () => {
-        $('.alert').hide().fadeIn('slow').delay(5000).fadeOut('slow', function() {
-            $('.alert').remove();
-        });
+        $('.alert')
+            .fadeTo(1, 0)
+            .delay(500)
+            .fadeTo('slow', 1)
+            .delay(5000)
+            .fadeOut('slow', function() {
+                $('.alert').remove();
+            });
     }
 </script>
