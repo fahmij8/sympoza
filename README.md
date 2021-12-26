@@ -1,7 +1,7 @@
 # Sympozia Project
 
-<p align="center"><img src="https://img.youtube.com/vi/CnnnlR6zi3E/maxresdefault.jpg" width="400"></p>
-<p>
+<p align="center"><img src="https://img.youtube.com/vi/CnnnlR6zi3E/maxresdefault.jpg" width="600"></p>
+<p align="center">
     <img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel">
     <img src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
     <img src="https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black" alt="Webpack">
