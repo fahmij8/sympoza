@@ -163,14 +163,19 @@ class DatabaseSeeder extends Seeder
         $fahmi->roles()->attach(Role::where('name', 'author')->first());
 
         // Additional User
-        User::factory()->count(3)->create()->each(function ($user) {
-            Profile_Sympozia::create([
-                'user_id' => $user->id,
-                'first_name' => explode(' ', $user->name)[0],
-                'last_name' => explode(' ', $user->name)[1],
-                'email' => $user->email,
-            ]);
-            $user->roles()->attach(Role::where('name', 'author')->first());
-        });
+        $adminlte = User::create([
+            'name' => 'Admin LTE',
+            'email' => 'adminlte@google.com',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+        ]);
+
+        Profile_Sympozia::create([
+            'user_id' => $adminlte->id,
+            'first_name' => 'Admin',
+            'last_name' => 'LTE',
+            'email' => $adminlte->email,
+        ]);
+
+        $adminlte->roles()->attach(Role::where('name', 'admin')->first());
     }
 }
