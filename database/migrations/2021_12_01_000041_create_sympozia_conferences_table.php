@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -23,7 +22,7 @@ class CreateSympoziaConferencesTable extends Migration
             $table->string('date')->nullable();
             $table->string('time')->nullable();
             $table->string('image')->nullable();
-            $table->json('scope')->default(new Expression('(JSON_ARRAY())'));
+            $table->text('scope');
             $table->timestamps();
         });
     }
