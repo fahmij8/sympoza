@@ -5,7 +5,6 @@ import Tagify from "@yaireo/tagify";
 
 // Function Helper
 const initAddPaper = () => {
-    console.log("initAddPaper");
     const stepper = new Stepper($(".bs-stepper")[0]);
     let pageStepper = 1;
     $(".stepper-next").on("click", () => {
@@ -34,7 +33,6 @@ const initAddPaper = () => {
 };
 
 const initEditPaper = () => {
-    console.log("initEditPaper");
     new Tagify(document.querySelector("#keywords"), {
         maxTags: 4,
     });
@@ -56,7 +54,6 @@ window.addEventListener("popstate", function (event) {
 
 // Emit handler
 document.addEventListener("livewire:load", function () {
-    console.log("livewire:load");
     Livewire.on("action", (actions) => {
         window.scrollTo(0, 0);
         if (actions === "show-add-paper") {
@@ -65,9 +62,7 @@ document.addEventListener("livewire:load", function () {
         } else if (actions === "show-edit-paper") {
             initEditPaper();
         } else if (actions === null) {
-            console.log("initNull");
             $("#deleteSubmission").on("hidden.bs.modal", function (event) {
-                console.log("hidden.bs.modal");
                 Livewire.emit("deletePaper", null);
             });
             setTimeout(
@@ -91,7 +86,6 @@ window.addEventListener("DOMContentLoaded", function () {
         initAddPaper();
     } else if (pathName === "/author/submission") {
         $("#deleteSubmission").on("hidden.bs.modal", function (event) {
-            console.log("hidden.bs.modal");
             Livewire.emit("deletePaper", null);
         });
     } else if (pathName.includes("/author/submission/edit")) {
