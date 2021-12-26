@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -22,7 +23,7 @@ class CreateSympoziaManuscriptAuthorTable extends Migration
             $table->string('presenter');
             $table->string('scope');
             $table->string('contact');
-            $table->json('author_list');
+            $table->json('author_list')->default(new Expression('(JSON_ARRAY())'));
             $table->timestamps();
         });
     }

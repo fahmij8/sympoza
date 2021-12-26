@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -21,7 +22,7 @@ class CreateSympoziaManuscriptTable extends Migration
             $table->foreign('conferences_id')->references('id')->on('sympozia_conferences');
             $table->string('title')->unique();
             $table->text('abstract')->unique();
-            $table->json('keywords')->unique();
+            $table->json('keywords')->unique()->default(new Expression('(JSON_ARRAY())'));
             $table->unsignedBigInteger('milestone_id');
             $table->foreign('milestone_id')->references('id')->on('sympozia_manuscript_milestone')->onDelete('cascade');
             $table->unsignedBigInteger('status_id');
