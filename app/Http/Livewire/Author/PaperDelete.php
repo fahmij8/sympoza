@@ -32,12 +32,11 @@ class PaperDelete extends Component
 
         if ($this->selectedPaper->where('user_id', auth()->user()->id)->count() == 0) {
             $this->selectedPaper = null;
-            $this->emit('refreshPaperAfterDelete');
         } else {
             $this->selectedPaper = null;
-            $this->emit('refreshPaperAfterDelete');
             $this->emit('refreshTable');
         }
+        $this->emit('refreshPaperAfterDelete');
     }
 
     public function deletePaper($id)
