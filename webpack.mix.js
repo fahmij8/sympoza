@@ -14,5 +14,5 @@ const mix = require("laravel-mix");
 mix.disableSuccessNotifications()
     .js("resources/js/app.js", "public/js")
     .babel("public/js/app.js", "public/js/app.js")
-    .sass("resources/sass/app.scss", "public/css")
+    .sass("resources/sass/app.sass", "public/css")
     .version();
