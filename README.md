@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/github/last-commit/fahmij8/sympoza?style=for-the-badge" alt="Last Commit">
+    <img src="https://wakatime.com/badge/user/761b44aa-c23f-4d0f-8a49-4d2f91a7fef7/project/60b63154-983c-4f7c-a368-030b504990b4.svg?style=for-the-badge" alt="Time Spent">
     <a href="https://sympozia-kelompok3.herokuapp.com/">
         <img src="https://img.shields.io/website?down_message=%E2%9D%8C%20Not%20Available&label=Live%20Demo&style=for-the-badge&up_message=%E2%9C%94%20Click%20Here&url=https%3A%2F%2Fsympozia-kelompok3.herokuapp.com%2F">
     </a>
