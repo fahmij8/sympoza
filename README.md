@@ -15,6 +15,9 @@
     <a href="https://sympozia-kelompok3.herokuapp.com/">
         <img src="https://img.shields.io/website?down_message=%E2%9D%8C%20Not%20Available&label=Live%20Demo&style=for-the-badge&up_message=%E2%9C%94%20Click%20Here&url=https%3A%2F%2Fsympozia-kelompok3.herokuapp.com%2F">
     </a>
+    <a href="https://www.youtube.com/watch?v=CnnnlR6zi3E">
+        <img src="https://img.shields.io/badge/Video%20Demo-YouTube-red.svg?logo=youtube&style=for-the-badge">
+    </a>
 </p>
 
 ## Assignments
